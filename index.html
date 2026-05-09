@@ -1,0 +1,62 @@
+<!doctype html>
+<!-- Static HTML shell for the Nomi Bagi Wheel MVP. -->
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>노미와 바기 돌림판</title>
+    <meta name="description" content="키즈 방송풍으로 시작해 파칭코 보너스 타임으로 폭주하는 노미와 바기 돌림판">
+    <link rel="stylesheet" href="src/styles/reset.css?v=portrait-rotate1">
+    <link rel="stylesheet" href="src/styles/main.css?v=portrait-rotate1">
+    <link rel="stylesheet" href="src/styles/kids.css?v=portrait-rotate1">
+    <link rel="stylesheet" href="src/styles/pachinko.css?v=portrait-rotate1">
+    <link rel="stylesheet" href="src/styles/animations.css?v=portrait-rotate1">
+  </head>
+  <body class="theme-kids">
+    <main class="app-shell" data-app>
+      <section class="stage" aria-labelledby="site-title">
+        <div class="stage__backdrop" data-backdrop></div>
+        <div class="spark-layer" data-effects aria-hidden="true"></div>
+
+        <header class="hero-copy">
+          <div class="top-status" aria-label="돌림판 상태">
+            <p class="eyebrow" data-mode-label>키즈 돌림판</p>
+            <p class="spin-count" data-spin-count>누적 0회</p>
+          </div>
+          <h1 id="site-title">노미와 바기 돌림판</h1>
+          <p class="lead" data-message>보니 하니 본의 아니게 이뤄져 버린 나의 삶</p>
+        </header>
+
+        <section class="game-board" aria-label="노미와 바기 돌림판 게임">
+          <div class="wheel-area">
+            <div class="pointer" aria-hidden="true"></div>
+            <div class="wheel" data-wheel aria-live="polite">
+              <div class="wheel__segments" data-wheel-segments></div>
+              <div class="wheel__hub" data-wheel-label>READY</div>
+            </div>
+          </div>
+
+          <div class="bonus-banner" data-bonus-banner aria-hidden="true">
+            <span>BONUS TIME</span>
+            <span>777</span>
+            <span>SUPER NOMI CHANCE</span>
+            <span>BAGI RUSH</span>
+            <span>한 번 더!</span>
+          </div>
+
+          <section class="result-panel" aria-live="polite">
+            <p class="round-label" data-round-label>대기 중</p>
+            <p class="result" data-result>돌려 돌려 돌림판 이젠 나의 보너스 타임</p>
+          </section>
+
+          <button class="spin-button" type="button" data-spin-button>돌려보기</button>
+        </section>
+      </section>
+    </main>
+
+    <script defer src="src/js/state.js?v=portrait-rotate1"></script>
+    <script defer src="src/js/effects.js?v=portrait-rotate1"></script>
+    <script defer src="src/js/wheel.js?v=portrait-rotate1"></script>
+    <script defer src="src/js/app.js?v=portrait-rotate1"></script>
+  </body>
+</html>

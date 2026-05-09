@@ -1,0 +1,15 @@
+/* Children's-show look for the first screen and first spin. */
+.theme-kids .stage__backdrop {
+  background:
+    radial-gradient(circle at 16% 18%, rgba(255, 255, 255, 0.9), transparent 18rem),
+    radial-gradient(circle at 84% 18%, rgba(255, 255, 255, 0.66), transparent 16rem),
+    linear-gradient(135deg, #fff3a3 0%, #ffc9e6 48%, #b9f1ff 100%);
+}
+
+.theme-kids .wheel {
+  animation: floaty 3s ease-in-out infinite;
+}
+
+.theme-kids .spin-button {
+  animation: buttonBounce 2.4s ease-in-out infinite;
+}

@@ -1,0 +1,349 @@
+/* Motion effects for spinning, bonus flashes, and celebration sparks. */
+@keyframes floaty {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -8px;
+  }
+}
+
+@keyframes buttonBounce {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -4px;
+  }
+}
+
+@keyframes pulseHub {
+  0%,
+  100% {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.08;
+  }
+}
+
+@keyframes flashingBorder {
+  0%,
+  100% {
+    opacity: 1;
+    filter:
+      drop-shadow(0 0 8px rgba(255, 245, 123, 0.95))
+      drop-shadow(0 0 18px rgba(255, 22, 63, 0.84));
+  }
+
+  50% {
+    opacity: 0.42;
+    filter:
+      drop-shadow(0 0 4px rgba(255, 245, 123, 0.5))
+      drop-shadow(0 0 10px rgba(255, 22, 63, 0.5));
+  }
+}
+
+@keyframes screenShake {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(1px, -1px);
+  }
+
+  50% {
+    transform: translate(-1px, 1px);
+  }
+
+  75% {
+    transform: translate(1px, 1px);
+  }
+}
+
+@keyframes jackpotPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+
+  50% {
+    transform: scale(1.045);
+    filter: brightness(1.65);
+  }
+}
+
+@keyframes neonText {
+  0%,
+  100% {
+    filter: brightness(1);
+    text-shadow:
+      0 0 7px rgba(255, 245, 123, 0.9),
+      0 0 18px rgba(255, 22, 63, 0.8);
+  }
+
+  50% {
+    filter: brightness(1.8);
+    text-shadow:
+      0 0 9px rgba(255, 255, 255, 0.96),
+      0 0 22px rgba(255, 245, 123, 0.95),
+      0 0 36px rgba(255, 22, 63, 0.9);
+  }
+}
+
+@keyframes coinBurst {
+  from {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  to {
+    transform: translateY(44px) rotate(360deg);
+  }
+}
+
+@keyframes pachinkoSweep {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shine {
+  from {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(-130px) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes cutscenePop {
+  0% {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+
+  18% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes cutsceneShake {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  20% {
+    transform: translate3d(-5px, 2px, 0);
+  }
+
+  40% {
+    transform: translate3d(5px, -2px, 0);
+  }
+
+  60% {
+    transform: translate3d(-3px, -3px, 0);
+  }
+
+  80% {
+    transform: translate3d(3px, 3px, 0);
+  }
+}
+
+@keyframes cutsceneFlash {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 0.62;
+  }
+}
+
+.is-spinning .wheel {
+  animation: none;
+}
+
+.is-spinning .wheel__hub {
+  animation: pulseHub 0.55s ease-in-out infinite;
+}
+
+.is-bonus .wheel-area {
+  animation: screenShake 0.14s linear infinite;
+}
+
+.is-spinning.is-bonus .wheel-area {
+  animation: none;
+}
+
+.is-bonus .bonus-banner span:nth-child(2n) {
+  animation-delay: 0.08s;
+}
+
+.is-bonus .bonus-banner span:nth-child(3n) {
+  animation-delay: 0.16s;
+}
+
+.spark-layer {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 4;
+}
+
+.spark {
+  position: absolute;
+  width: 12px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--spark-color, #ffd447);
+  box-shadow: 0 0 18px currentColor;
+  animation: shine 1.1s ease-out forwards;
+}
+
+.bonus-cutscene {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: rgba(10, 0, 12, 0.06);
+  overflow: hidden;
+}
+
+.bonus-cutscene::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.34), transparent 18rem),
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+  opacity: 0.2;
+  animation: cutsceneFlash 0.18s steps(2, end) infinite;
+}
+
+.bonus-cutscene.is-shaking {
+  animation: cutsceneShake 0.12s linear infinite;
+}
+
+.bonus-cutscene.is-leaving {
+  opacity: 0;
+  transition: opacity 180ms ease-out;
+}
+
+.bonus-cutscene__portrait {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(68vw, 330px);
+  aspect-ratio: 1;
+  border: 8px solid rgba(255, 245, 123, 0.92);
+  border-radius: 50%;
+  background-color: rgba(12, 0, 18, 0.8);
+  background-position: center;
+  background-size: cover;
+  box-shadow:
+    inset 0 0 0 999px rgba(8, 0, 18, 0.22),
+    0 0 28px rgba(255, 245, 123, 0.92),
+    0 0 74px rgba(255, 22, 63, 0.78);
+  opacity: 0.72;
+  transform: translate(-50%, -50%) scale(0.96);
+  animation: jackpotPulse 0.7s ease-in-out infinite;
+}
+
+.bonus-cutscene__portrait.has-image {
+  display: block;
+}
+
+.bonus-cutscene__text {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  max-width: min(92vw, 380px);
+  padding: 0 10px;
+  font-size: clamp(3.3rem, 17vw, 5.4rem);
+  font-weight: 1000;
+  line-height: 0.95;
+  text-align: center;
+  text-shadow:
+    0 5px 0 rgba(0, 0, 0, 0.42),
+    0 0 20px rgba(255, 79, 154, 0.82);
+  animation: cutscenePop 0.28s ease-out both;
+}
+
+.bonus-cutscene__text.is-chance {
+  color: #fff57b;
+  text-shadow:
+    0 5px 0 rgba(0, 0, 0, 0.46),
+    0 0 22px rgba(255, 245, 123, 0.92),
+    0 0 42px rgba(255, 79, 154, 0.7);
+}
+
+.bonus-cutscene__text.is-bonus-hit {
+  color: #ffd447;
+  font-size: clamp(3.2rem, 14vw, 5.2rem);
+  text-shadow:
+    0 6px 0 rgba(0, 0, 0, 0.52),
+    0 0 18px rgba(255, 245, 123, 0.96),
+    0 0 48px rgba(255, 22, 63, 0.86);
+}
+
+.bonus-cutscene--super {
+  background: rgba(0, 3, 26, 0.12);
+}
+
+.bonus-cutscene--super .bonus-cutscene__portrait {
+  border-color: rgba(125, 247, 255, 0.94);
+  box-shadow:
+    inset 0 0 0 999px rgba(4, 0, 28, 0.28),
+    0 0 28px rgba(125, 247, 255, 0.92),
+    0 0 74px rgba(194, 0, 255, 0.78);
+}
+
+.bonus-cutscene--super::before {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(125, 247, 255, 0.42), transparent 18rem),
+    linear-gradient(90deg, transparent, rgba(194, 0, 255, 0.22), transparent);
+}
+
+.bonus-cutscene--super .bonus-cutscene__text {
+  color: #7df7ff;
+  text-shadow:
+    0 5px 0 rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(125, 247, 255, 0.95),
+    0 0 42px rgba(194, 0, 255, 0.82);
+}
+
+.bonus-cutscene--super .bonus-cutscene__text.is-bonus-hit {
+  color: #ffffff;
+  text-shadow:
+    0 6px 0 rgba(0, 0, 0, 0.56),
+    0 0 18px rgba(255, 255, 255, 0.96),
+    0 0 44px rgba(125, 247, 255, 0.9),
+    0 0 70px rgba(194, 0, 255, 0.84);
+}

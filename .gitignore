@@ -1,0 +1,7 @@
+# Local OS/editor files that should not be published.
+.DS_Store
+**/.DS_Store
+
+# Temporary logs and local tooling output.
+*.log
+node_modules/
